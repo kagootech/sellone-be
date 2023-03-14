@@ -35,6 +35,8 @@ class LoginController extends Controller
                 'password' => uniqid(), // you can change auto generate password here and send it via email but you need to add checking that the user need to change the password for security reasons
             ]);
 
+            $finduser = User::find($user->id);
+
             Auth::login($user);
         }
 

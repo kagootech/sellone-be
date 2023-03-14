@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Shop\ProductController as ShopProductController;
+use App\Http\Controllers\ShopController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,17 +21,31 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::domain('api.sellone.shop')->group(function(){
+
+    // Must auth
     Route::middleware('auth:sanctum')->group(function(){
         Route::get('/user', function (Request $request) {
-            return $request->user()->get(['name','email']);
+            return $request->user();
         });
 
         Route::prefix('product')->group(function(){
-
+            Route::get('', [ProductController::class, 'index']);
+            Route::get('/{state}/view', [ProductController::class, 'show']);
         });
 
         Route::prefix('order')->group(function(){
             Route::post('/charge', [OrderController::class, 'charge']);
+        });
+
+
+        // Route for manage shop (CRUD product/Order am)
+        Route::prefix('mng-shop')->group(function() {
+
+            Route::post('/register', [ShopController::class, 'store']);
+
+            Route::prefix('product')->group(function(){
+                Route::post('/store', [ShopProductController::class, 'store']);
+            });
         });
     });
 });
