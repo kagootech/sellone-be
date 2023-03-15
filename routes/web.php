@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::domain('auth.sellone.shop')->group(function () {
+Route::domain(env('AUTH_DOMAIN'))->group(function () {
     Route::get('/login', [LoginController::class, 'redirect']);
     Route::get('/login/callback', [LoginController::class, 'callback']);
 });
