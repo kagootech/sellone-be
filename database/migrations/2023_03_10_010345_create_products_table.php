@@ -17,9 +17,9 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->integer('shop_id');
             $table->integer('category_id');
-            $table->string('image');
-            $table->string('state');
-            $table->string('name');
+            $table->string('image', 100);
+            $table->string('state', 100);
+            $table->string('name', 100);
             $table->string('detail', 200);
             $table->tinyInteger('status')->default(1);
             $table->timestamps();

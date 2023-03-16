@@ -19,7 +19,7 @@ class CreateOrdersTable extends Migration
             $table->integer('user_id');
             $table->integer('seller_id');
             $table->string('customer_name', 50);
-            $table->string('customer_address');
+            $table->string('customer_address', 200);
             $table->tinyInteger('qty')->default(1);
             $table->tinyInteger('status')->default(1);
             $table->string('payment_method', 20);
