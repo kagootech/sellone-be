@@ -36,9 +36,9 @@ Route::domain(env('API_DOMAIN'))->group(function () {
             return $request->user();
         });
         Route::post('/image', [ImageController::class, 'store']);
-        // Route::prefix('order')->group(function () {
-        //     Route::post('/charge', [OrderController::class, 'charge']);
-        // });
+        Route::prefix('order')->group(function () {
+            Route::post('/charge', [OrderController::class, 'charge']);
+        });
 
         Route::prefix('wishlist')->group(function(){
             Route::get('/', [WishlistController::class, 'index']);
